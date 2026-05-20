@@ -102,6 +102,13 @@
   footer{padding:48px 0;border-top:1px solid var(--line);color:var(--mute);font-size:13px}
   footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
 
+  /* CTA confirmation toast */
+  .cta-toast{position:fixed;left:50%;bottom:32px;transform:translate(-50%,200%);background:var(--ink);color:#FAFAF9;padding:16px 22px;border-radius:14px;box-shadow:0 12px 40px rgba(12,10,9,.35),0 2px 8px rgba(12,10,9,.18);font-size:14px;font-weight:500;line-height:1.45;max-width:440px;z-index:200;transition:transform .35s cubic-bezier(.2,.8,.2,1.05),opacity .25s;opacity:0;pointer-events:none}
+  .cta-toast.show{transform:translate(-50%,0);opacity:1;pointer-events:auto}
+  .cta-toast::before{content:'';display:inline-block;width:18px;height:18px;margin-right:10px;background-color:var(--emerald-2);mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>") center/contain no-repeat;-webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>") center/contain no-repeat;vertical-align:-4px}
+  .cta-toast .ct-strong{font-weight:600;color:#FAFAF9}
+  .cta-toast .ct-sub{display:block;margin-top:4px;color:#A8A29E;font-size:13px;font-weight:400}
+
   @media (max-width:880px){
     h1{font-size:48px}
     .hero-stats{grid-template-columns:repeat(2,1fr)}
@@ -118,6 +125,11 @@
 </style>
 </head>
 <body>
+
+<div class="cta-toast" id="cta-toast" role="status" aria-live="polite">
+  <span class="ct-strong">Request received — Noah will be in touch shortly.</span>
+  <span class="ct-sub">If your email client opened, finish the message there and hit send.</span>
+</div>
 
 <nav><div class="wrap">
   <div class="brand">
@@ -536,10 +548,12 @@ new Chart(document.getElementById('chart-lic-states'), {
   options: horizOpts
 });
 
-// CTA click → Telegram ping (fire-and-forget; mailto still opens).
+// CTA click → Telegram ping + in-page confirmation toast.
 (function () {
   const cta = document.getElementById('cta-email');
+  const toast = document.getElementById('cta-toast');
   if (!cta) return;
+  let hideT;
   cta.addEventListener('click', function () {
     const payload = JSON.stringify({
       page: 'florida-agents-arkdata.netlify.app',
@@ -548,7 +562,6 @@ new Chart(document.getElementById('chart-lic-states'), {
     });
     try {
       const blob = new Blob([payload], { type: 'application/json' });
-      // sendBeacon survives page navigation — best choice for click→mailto.
       if (navigator.sendBeacon) {
         navigator.sendBeacon('/.netlify/functions/click', blob);
       } else {
@@ -559,7 +572,12 @@ new Chart(document.getElementById('chart-lic-states'), {
           keepalive: true,
         });
       }
-    } catch (e) { /* swallow — never block the mailto */ }
+    } catch (e) { /* never block the mailto */ }
+    if (toast) {
+      clearTimeout(hideT);
+      toast.classList.add('show');
+      hideT = setTimeout(function () { toast.classList.remove('show'); }, 6000);
+    }
   });
 })();
 </script>
