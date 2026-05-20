@@ -364,7 +364,7 @@
       <div class="meta">Standard delivery: ZIP archive within 24 hours of contract execution.</div>
     </div>
     <div style="display:flex;flex-direction:column;gap:14px">
-      <a class="btn" href="mailto:noah@arkdata.io?cc=shaw@arkdata.io&subject=Florida%20Insurance%20Agent%20Universe%20%E2%80%94%20Inquiry">Email noah@arkdata.io →</a>
+      <a class="btn" id="cta-email" href="mailto:noah@arkdata.io?cc=shaw@arkdata.io&subject=Florida%20Insurance%20Agent%20Universe%20%E2%80%94%20Inquiry">Email noah@arkdata.io →</a>
       <div style="font-size:13px;color:#A8A29E">Or reply to the introduction email you received.</div>
     </div>
   </div>
@@ -535,6 +535,33 @@ new Chart(document.getElementById('chart-lic-states'), {
           datasets: [{ data: otherStates.map(x=>x[1]), backgroundColor: "#10B981", borderRadius: 3 }]},
   options: horizOpts
 });
+
+// CTA click → Telegram ping (fire-and-forget; mailto still opens).
+(function () {
+  const cta = document.getElementById('cta-email');
+  if (!cta) return;
+  cta.addEventListener('click', function () {
+    const payload = JSON.stringify({
+      page: 'florida-agents-arkdata.netlify.app',
+      button: 'Email noah@arkdata.io',
+      ts: new Date().toISOString(),
+    });
+    try {
+      const blob = new Blob([payload], { type: 'application/json' });
+      // sendBeacon survives page navigation — best choice for click→mailto.
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon('/.netlify/functions/click', blob);
+      } else {
+        fetch('/.netlify/functions/click', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: payload,
+          keepalive: true,
+        });
+      }
+    } catch (e) { /* swallow — never block the mailto */ }
+  });
+})();
 </script>
 </body>
 </html>
