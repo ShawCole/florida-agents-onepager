@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Florida Insurance Agent Universe — ArkData</title>
+<meta name="description" content="The complete licensed-insurance-agent population of Florida: 250,707 agents, 3.1M license records, 5.0M carrier appointments — delivered as one bundled file." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:wght@500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#FAFAF9; --card:#FFFFFF; --ink:#0C0A09; --ink-2:#27272A; --mute:#71717A; --line:#E7E5E4;
+    --emerald:#047857; --emerald-2:#10B981; --emerald-50:#ECFDF5; --emerald-100:#D1FAE5;
+    --shadow: 0 1px 2px rgba(12,10,9,.04), 0 1px 12px rgba(12,10,9,.04);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-feature-settings:"ss01","cv11";line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+  nav{padding:24px 0;border-bottom:1px solid var(--line);background:rgba(250,250,249,.85);position:sticky;top:0;z-index:10;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:18px;letter-spacing:-.02em}
+  .brand-mark{width:30px;height:30px;border-radius:7px;background:var(--ink);display:grid;place-items:center;color:#fff;font-family:'Fraunces',serif;font-weight:900;font-size:19px}
+  .brand-suffix{color:var(--mute);font-weight:500;font-size:13px;margin-left:4px}
+  .nav-cta{font-size:14px;font-weight:600;color:var(--ink);background:var(--emerald-50);padding:9px 14px;border-radius:999px;text-decoration:none;border:1px solid var(--emerald-100);transition:.15s}
+  .nav-cta:hover{background:var(--emerald-100)}
+
+  .hero{padding:72px 0 40px}
+  .eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--emerald);margin-bottom:18px;display:inline-flex;align-items:center;gap:8px}
+  .eyebrow::before{content:'';display:inline-block;width:6px;height:6px;background:var(--emerald);border-radius:999px}
+  h1{font-family:'Fraunces',serif;font-weight:700;font-size:76px;line-height:1.02;letter-spacing:-.035em;margin:0 0 22px;color:var(--ink)}
+  h1 em{font-style:italic;font-weight:500;color:var(--emerald)}
+  .lede{font-size:21px;color:var(--ink-2);max-width:780px;margin-bottom:38px;line-height:1.45;font-weight:400}
+  .lede strong{color:var(--ink);font-weight:600}
+
+  .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:48px 0 12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:32px 0}
+  .hs{padding:0 28px;border-right:1px solid var(--line)}
+  .hs:last-child{border-right:none}
+  .hs:first-child{padding-left:0}
+  .hs .num{font-family:'Fraunces',serif;font-weight:700;font-size:44px;letter-spacing:-.025em;color:var(--ink);line-height:1}
+  .hs .num .pct{font-size:24px}
+  .hs .lab{font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:.06em;margin-top:8px;font-weight:600}
+  .hs .sub{font-size:13px;color:var(--ink-2);margin-top:6px}
+
+  section{padding:80px 0;border-top:1px solid var(--line)}
+  section.alt{background:#F5F4F1}
+  .sec-head{margin-bottom:48px;max-width:780px}
+  .sec-eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--emerald);margin-bottom:14px}
+  h2{font-family:'Fraunces',serif;font-weight:700;font-size:44px;line-height:1.08;letter-spacing:-.025em;margin:0 0 16px;color:var(--ink)}
+  .sec-desc{font-size:17px;color:var(--ink-2);line-height:1.5}
+
+  .grid{display:grid;gap:20px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px;box-shadow:var(--shadow)}
+  .card.dark{background:var(--ink);color:#FAFAF9;border-color:#27272A}
+  .card.dark .ck-title,.card.dark .ck-stat{color:#FAFAF9}
+  .card.dark .ck-sub{color:#A1A1AA}
+  .ck-title{font-size:13px;font-weight:600;color:var(--mute);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+  .ck-stat{font-family:'Fraunces',serif;font-weight:700;font-size:36px;letter-spacing:-.02em;line-height:1.1;color:var(--ink)}
+  .ck-stat .u{font-size:18px;color:var(--mute);font-weight:500}
+  .ck-sub{font-size:14px;color:var(--mute);margin-top:8px}
+
+  .chart-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px;box-shadow:var(--shadow)}
+  .chart-card h3{font-family:'Inter',sans-serif;font-size:18px;font-weight:700;margin:0 0 4px;letter-spacing:-.01em}
+  .chart-card .sub{font-size:14px;color:var(--mute);margin-bottom:24px}
+  .chart-box{position:relative;height:280px}
+  .chart-box.x-tall{height:520px}
+
+  table.bundle{width:100%;border-collapse:collapse;font-size:15px}
+  table.bundle th,table.bundle td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line)}
+  table.bundle thead th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);font-weight:600;border-bottom:2px solid var(--ink)}
+  table.bundle tbody tr:last-child td{border-bottom:none}
+  table.bundle .f-name{font-weight:600;color:var(--ink)}
+  table.bundle .f-rows{font-variant-numeric:tabular-nums;color:var(--ink-2)}
+  table.bundle .f-pop{color:var(--emerald);font-weight:600}
+
+  .loa-list{display:flex;flex-direction:column;gap:11px}
+  .loa-row{display:grid;grid-template-columns:170px 1fr 70px;align-items:center;gap:16px;font-size:14px}
+  .loa-row .nm{font-weight:600;color:var(--ink)}
+  .loa-row .bar{height:8px;background:#F5F4F1;border-radius:999px;overflow:hidden}
+  .loa-row .bar > .fill{height:100%;background:var(--emerald);border-radius:999px}
+  .loa-row .pct{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink-2);font-weight:500}
+
+  .cta-card{background:var(--ink);color:#FAFAF9;border-radius:18px;padding:64px 56px;display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center}
+  .cta-card h2{color:#FAFAF9;font-size:40px}
+  .cta-card .lede{color:#D6D3D1;font-size:18px}
+  .cta-card .btn{display:inline-flex;align-items:center;gap:10px;background:var(--emerald-2);color:#0C0A09;padding:14px 22px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none;transition:.15s}
+  .cta-card .btn:hover{background:#34D399}
+  .cta-card .meta{font-size:14px;color:#A8A29E;margin-top:18px}
+
+  footer{padding:48px 0;border-top:1px solid var(--line);color:var(--mute);font-size:13px}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+
+  @media (max-width:880px){
+    h1{font-size:48px}
+    .hero-stats{grid-template-columns:repeat(2,1fr)}
+    .hs{padding:18px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .hs:nth-child(2){border-right:none}
+    .hs:nth-child(3),.hs:nth-child(4){border-bottom:none}
+    .hs:nth-child(4){border-right:none}
+    .g2,.g3,.g4{grid-template-columns:1fr}
+    .cta-card{grid-template-columns:1fr;padding:40px 28px}
+    .loa-row{grid-template-columns:120px 1fr 60px;font-size:13px}
+    section{padding:56px 0}
+    h2{font-size:32px}
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <div class="brand">
+    <div class="brand-mark">A</div>
+    <div>ArkData<span class="brand-suffix">/ Data Products</span></div>
+  </div>
+  <a class="nav-cta" href="#inquire">Request access →</a>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">Data Product · Florida</div>
+  <h1>Every licensed<br/>insurance agent <em>in Florida.</em></h1>
+  <p class="lede">A single, fully-resolved file containing <strong>every Florida-resident licensed insurance agent</strong> — their contact information, every state license they hold, and every carrier appointment they've ever been issued. Sourced directly from state DOI filings and NAIC's NIPR feed, refreshed monthly.</p>
+
+  <div class="hero-stats">
+    <div class="hs"><div class="num">250,707</div><div class="lab">Licensed Agents</div><div class="sub">Florida resident, all LOAs</div></div>
+    <div class="hs"><div class="num">3.14M</div><div class="lab">License Records</div><div class="sub">Across all 50 states + DC</div></div>
+    <div class="hs"><div class="num">4.96M</div><div class="lab">Carrier Appointments</div><div class="sub">Every carrier, every status</div></div>
+    <div class="hs"><div class="num">99.7<span class="pct">%</span></div><div class="lab">Phone Coverage</div><div class="sub">97.5% email · 100% address</div></div>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+  <div class="sec-head">
+    <div class="sec-eyebrow">What's in the file</div>
+    <h2>Three datasets, one file, one key.</h2>
+    <p class="sec-desc">All three datasets are joinable on <strong>NPN</strong> (National Producer Number) — the universal identifier used by every state DOI. You get the full agent population, every license they hold in any state, and every carrier they're appointed to — bundled and ready to query.</p>
+  </div>
+
+  <div class="card" style="padding:8px 0">
+    <table class="bundle">
+      <thead><tr><th>Dataset</th><th>Rows</th><th>Fields</th><th>Population Coverage</th><th>What it tells you</th></tr></thead>
+      <tbody>
+        <tr><td class="f-name">Agent Profile</td><td class="f-rows">250,707</td><td>83</td><td class="f-pop">100.0%</td><td>Identity, contact, address, demographics, LOAs, BD/RIA registration</td></tr>
+        <tr><td class="f-name">License Detail</td><td class="f-rows">3,136,471</td><td>14</td><td class="f-pop">99.7%</td><td>Every license — issuing state, line of authority, dates, status</td></tr>
+        <tr><td class="f-name">Carrier Appointments</td><td class="f-rows">4,962,015</td><td>11</td><td class="f-pop">87.3%</td><td>Every carrier appointment — carrier, group, dates, active vs cancelled</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid g3" style="margin-top:28px">
+    <div class="card">
+      <div class="ck-title">Per Agent · Licenses</div>
+      <div class="ck-stat">12.5 <span class="u">avg</span></div>
+      <div class="ck-sub">Median 4, max 305 — full license history, never truncated</div>
+    </div>
+    <div class="card">
+      <div class="ck-title">Per Agent · Appointments</div>
+      <div class="ck-stat">22.7 <span class="u">avg</span></div>
+      <div class="ck-sub">Median 8, max 582 — active + historical carrier relationships</div>
+    </div>
+    <div class="card dark">
+      <div class="ck-title">Join Key</div>
+      <div class="ck-stat">NPN</div>
+      <div class="ck-sub">Stable across renewals, transfers, and re-licensure</div>
+    </div>
+  </div>
+</div></section>
+
+<section class="alt"><div class="wrap">
+  <div class="sec-head">
+    <div class="sec-eyebrow">Who they are</div>
+    <h2>Demographics &amp; tenure.</h2>
+    <p class="sec-desc">A working population — median age 45, median 5 years licensed, broadly balanced by gender. Spans from first-year producers building books to 30-year veterans managing renewals.</p>
+  </div>
+
+  <div class="grid g2">
+    <div class="chart-card">
+      <h3>Age distribution</h3>
+      <div class="sub">Median age <strong>45</strong> · mean <strong>45.9</strong></div>
+      <div class="chart-box"><canvas id="chart-age"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Years licensed</h3>
+      <div class="sub">Median <strong>5 yrs</strong> · mean <strong>9.2 yrs</strong></div>
+      <div class="chart-box"><canvas id="chart-years"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>States licensed in</h3>
+      <div class="sub">Median <strong>1</strong> · mean <strong>7.1</strong> — half are FL-only, half are multi-state</div>
+      <div class="chart-box"><canvas id="chart-states"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Gender split</h3>
+      <div class="sub">Near-even balance — atypical for sales-driven categories</div>
+      <div class="chart-box"><canvas id="chart-gender"></canvas></div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-head">
+    <div class="sec-eyebrow">What they sell</div>
+    <h2>Lines of authority held.</h2>
+    <p class="sec-desc">Each agent typically holds multiple lines. Life dominates at 62%, followed by Variable Products (securities-tied annuities) and Accident &amp; Health. The mix tells you exactly which agents to pitch which products.</p>
+  </div>
+
+  <div class="grid g2">
+    <div class="chart-card">
+      <h3>% of agents holding each LOA</h3>
+      <div class="sub">An agent typically holds 2–4 LOAs — percentages don't sum to 100%</div>
+      <div class="loa-list" id="loa-list"></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div class="card">
+        <div class="ck-title">Life license holders</div>
+        <div class="ck-stat">155,615</div>
+        <div class="ck-sub">62.1% of all FL agents — Term, Whole, IUL, Final Expense, MEC, Annuity-eligible</div>
+      </div>
+      <div class="card">
+        <div class="ck-title">Accident &amp; Health</div>
+        <div class="ck-stat">129,218</div>
+        <div class="ck-sub">51.5% — Medicare Advantage, ACA, group health, supplemental</div>
+      </div>
+      <div class="card">
+        <div class="ck-title">Variable Products (dual-licensed)</div>
+        <div class="ck-stat">145,580</div>
+        <div class="ck-sub">58.1% — also CRD-registered, can sell variable annuities &amp; mutual funds</div>
+      </div>
+      <div class="card">
+        <div class="ck-title">P&amp;C license holders</div>
+        <div class="ck-stat">54,660</div>
+        <div class="ck-sub">21.8% — Auto, home, commercial property/liability</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="alt"><div class="wrap">
+  <div class="sec-head">
+    <div class="sec-eyebrow">Who they sell for</div>
+    <h2>The carrier ecosystem.</h2>
+    <p class="sec-desc">Every carrier appointment — active and cancelled — gives you complete visibility into who works with whom. Filter by carrier to find prospects, by group to map distribution, or by appointment date to find newly-appointed agents.</p>
+  </div>
+
+  <div class="grid g2">
+    <div class="chart-card">
+      <h3>Top 15 carriers by # of appointed FL agents</h3>
+      <div class="sub">Health carriers dominate — Medicare &amp; ACA distribution heavy</div>
+      <div class="chart-box x-tall"><canvas id="chart-carriers"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Top 15 carrier groups</h3>
+      <div class="sub">By total appointments — group consolidation visible</div>
+      <div class="chart-box x-tall"><canvas id="chart-groups"></canvas></div>
+    </div>
+  </div>
+
+  <div class="grid g2" style="margin-top:20px">
+    <div class="chart-card">
+      <h3>Appointments per agent</h3>
+      <div class="sub">Median <strong>8</strong> · mean <strong>22.7</strong> — heavy long-tail of independent producers</div>
+      <div class="chart-box"><canvas id="chart-appts-per"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Appointment volume by start year</h3>
+      <div class="sub">Captures the post-2018 Medicare Advantage and ACA distribution boom</div>
+      <div class="chart-box"><canvas id="chart-appts-year"></canvas></div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-head">
+    <div class="sec-eyebrow">Where they work</div>
+    <h2>Geography &amp; out-of-state licensure.</h2>
+    <p class="sec-desc">Florida-resident agents serve far beyond Florida — 49% are licensed in at least one additional state. Pinpoint by city, ZIP (4,355 unique), or licensed-state combination.</p>
+  </div>
+
+  <div class="grid g2">
+    <div class="chart-card">
+      <h3>Top 15 home cities</h3>
+      <div class="sub">By # of resident agents — Miami, Orlando, Tampa lead</div>
+      <div class="chart-box x-tall"><canvas id="chart-home-cities"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>Where their licenses are filed</h3>
+      <div class="sub">Top 15 states excl. FL (581,764 FL licenses) — Southeast corridor + opportunistic multi-state filings</div>
+      <div class="chart-box x-tall"><canvas id="chart-lic-states"></canvas></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="alt"><div class="wrap">
+  <div class="sec-head">
+    <div class="sec-eyebrow">Reachability</div>
+    <h2>Contact-data quality.</h2>
+    <p class="sec-desc">The dataset is built for outbound. Phones are typed (wireless vs landline vs VOIP) so you can filter for TCPA-friendly mobile when needed. Emails are domain-validated and segmented by source.</p>
+  </div>
+
+  <div class="grid g4">
+    <div class="card"><div class="ck-title">Any phone</div><div class="ck-stat">99.7%</div><div class="ck-sub">249,994 of 250,707</div></div>
+    <div class="card"><div class="ck-title">Confirmed mobile</div><div class="ck-stat">46.3%</div><div class="ck-sub">115,989 with wireless-typed phone</div></div>
+    <div class="card"><div class="ck-title">Any email</div><div class="ck-stat">97.5%</div><div class="ck-sub">244,506 deliverable</div></div>
+    <div class="card"><div class="ck-title">Business-personal email</div><div class="ck-stat">75.1%</div><div class="ck-sub">188,193 — work email on personal domain</div></div>
+  </div>
+  <div class="grid g4" style="margin-top:20px">
+    <div class="card"><div class="ck-title">Has insurance firm</div><div class="ck-stat">10.2%</div><div class="ck-sub">25,526 — agency-affiliated</div></div>
+    <div class="card"><div class="ck-title">FINRA-registered (CRD)</div><div class="ck-stat">10.2%</div><div class="ck-sub">25,601 — dual insurance + securities</div></div>
+    <div class="card"><div class="ck-title">Broker-dealer affiliated</div><div class="ck-stat">8.1%</div><div class="ck-sub">20,370 BD-affiliated reps</div></div>
+    <div class="card"><div class="ck-title">RIA-affiliated</div><div class="ck-stat">6.7%</div><div class="ck-sub">16,779 — fee-based advisors</div></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-head">
+    <div class="sec-eyebrow">Built for</div>
+    <h2>What buyers do with it.</h2>
+  </div>
+  <div class="grid g3">
+    <div class="card">
+      <div class="ck-title">Agent recruiting</div>
+      <p style="margin:8px 0 0;font-size:15px;line-height:1.55;color:var(--ink-2)">IMOs, FMOs, brokerages targeting Life, A&amp;H, or Medicare agents — filter by LOA, tenure, carrier status, and contact directly.</p>
+    </div>
+    <div class="card">
+      <div class="ck-title">Carrier &amp; product distribution</div>
+      <p style="margin:8px 0 0;font-size:15px;line-height:1.55;color:var(--ink-2)">Carriers expanding into FL or launching new products — find appointed-elsewhere agents not yet on your contract.</p>
+    </div>
+    <div class="card">
+      <div class="ck-title">Insurtech &amp; SaaS GTM</div>
+      <p style="margin:8px 0 0;font-size:15px;line-height:1.55;color:var(--ink-2)">CRM, quoting, eApp, marketing automation — every licensed agent in FL with role, tenure, and carrier signal for ICP scoring.</p>
+    </div>
+    <div class="card">
+      <div class="ck-title">Compliance &amp; verification</div>
+      <p style="margin:8px 0 0;font-size:15px;line-height:1.55;color:var(--ink-2)">Verify license status, LOA scope, and active appointments for KYC, agent onboarding, or appointment audit workflows.</p>
+    </div>
+    <div class="card">
+      <div class="ck-title">Wealth management BD</div>
+      <p style="margin:8px 0 0;font-size:15px;line-height:1.55;color:var(--ink-2)">Identify dual-licensed (CRD + insurance) agents — 25,601 in FL — for IMO recruiting, BD transitions, RIA conversions.</p>
+    </div>
+    <div class="card">
+      <div class="ck-title">Lead-gen &amp; outbound</div>
+      <p style="margin:8px 0 0;font-size:15px;line-height:1.55;color:var(--ink-2)">99.7% phone, 97.5% email — TCPA-typed mobile, B2B email, and US-based home addresses for direct-mail.</p>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="cta-card" id="inquire">
+    <div>
+      <div style="font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--emerald-2);margin-bottom:14px">Request access</div>
+      <h2>250,707 Florida agents,<br/>delivered today.</h2>
+      <p class="lede">One file. NPN-joined. CSV or Parquet. Volume pricing available. Refresh subscription optional.</p>
+      <div class="meta">Standard delivery: ZIP archive within 24 hours of contract execution.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <a class="btn" href="mailto:shaw@arkdata.io?subject=Florida%20Insurance%20Agent%20Universe%20%E2%80%94%20Inquiry">Email shaw@arkdata.io →</a>
+      <div style="font-size:13px;color:#A8A29E">Or reply to the introduction email you received.</div>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div>© ArkData · Insurance-agent data products · Sourced from state DOI &amp; NAIC NIPR feed</div>
+  <div>Refreshed monthly · NPN-keyed · No PII beyond what's publicly licensed</div>
+</div></footer>
+
+<script src="data.js"></script>
+<script>
+const DATA = window.__ARKDATA__;
+Chart.defaults.font.family = "'Inter',system-ui,sans-serif";
+Chart.defaults.font.size = 12;
+Chart.defaults.color = "#27272A";
+Chart.defaults.borderColor = "#E7E5E4";
+const EMERALD = "#047857";
+const EMERALD_2 = "#10B981";
+const EMERALD_LIGHT = "rgba(4,120,87,.12)";
+
+const baseOpts = {
+  responsive: true, maintainAspectRatio: false,
+  plugins: { legend: { display: false }, tooltip: { backgroundColor: "#0C0A09", padding: 12, titleFont:{size:13,weight:'600'}, bodyFont:{size:13}, displayColors:false }},
+  scales: {
+    x: { grid: { display: false }, ticks: { color: "#71717A" } },
+    y: { grid: { color: "#F5F4F1" }, ticks: { color: "#71717A", callback: v => v.toLocaleString() }, beginAtZero: true }
+  }
+};
+const horizOpts = { ...baseOpts, indexAxis: 'y', scales: {
+  x: { grid: { color: "#F5F4F1" }, ticks: { color: "#71717A", callback: v => v.toLocaleString() }, beginAtZero: true },
+  y: { grid: { display: false }, ticks: { color: "#27272A", font:{size:12,weight:'500'} } }
+}};
+
+new Chart(document.getElementById('chart-age'), {
+  type: 'bar',
+  data: { labels: DATA.age_buckets.map(x=>x[0]), datasets: [{ data: DATA.age_buckets.map(x=>x[1]), backgroundColor: EMERALD, borderRadius: 4 }]},
+  options: baseOpts
+});
+new Chart(document.getElementById('chart-years'), {
+  type: 'bar',
+  data: { labels: DATA.years_buckets.map(x=>x[0]), datasets: [{ data: DATA.years_buckets.map(x=>x[1]), backgroundColor: EMERALD_2, borderRadius: 4 }]},
+  options: baseOpts
+});
+new Chart(document.getElementById('chart-states'), {
+  type: 'bar',
+  data: { labels: DATA.states_buckets.map(x=>x[0]), datasets: [{ data: DATA.states_buckets.map(x=>x[1]), backgroundColor: "#0F766E", borderRadius: 4 }]},
+  options: baseOpts
+});
+new Chart(document.getElementById('chart-gender'), {
+  type: 'doughnut',
+  data: { labels: ['Female','Male'], datasets: [{ data: [DATA.gender.F||0, DATA.gender.M||0], backgroundColor: [EMERALD, "#A7F3D0"], borderWidth:0 }]},
+  options: { responsive: true, maintainAspectRatio: false, cutout: '62%',
+    plugins: { legend: { display: true, position: 'bottom', labels:{padding:18,boxWidth:14,boxHeight:14,usePointStyle:true} },
+               tooltip: { backgroundColor:"#0C0A09", callbacks: { label: c => c.label + ': ' + c.parsed.toLocaleString() } } }
+  }
+});
+
+// LOA list — safe DOM construction (no innerHTML)
+const loaList = document.getElementById('loa-list');
+const maxLOA = Math.max.apply(null, DATA.loas.map(l => l[2]));
+DATA.loas.slice(0, 12).forEach(function(loa){
+  const name = loa[0], pct = loa[2];
+  const row = document.createElement('div');
+  row.className = 'loa-row';
+  const nm = document.createElement('div');
+  nm.className = 'nm';
+  nm.textContent = name;
+  const bar = document.createElement('div');
+  bar.className = 'bar';
+  const fill = document.createElement('div');
+  fill.className = 'fill';
+  fill.style.width = (pct / maxLOA * 100).toFixed(1) + '%';
+  bar.appendChild(fill);
+  const pctDiv = document.createElement('div');
+  pctDiv.className = 'pct';
+  pctDiv.textContent = pct + '%';
+  row.appendChild(nm);
+  row.appendChild(bar);
+  row.appendChild(pctDiv);
+  loaList.appendChild(row);
+});
+
+new Chart(document.getElementById('chart-carriers'), {
+  type: 'bar',
+  data: { labels: DATA.top_carriers.slice(0,15).map(x => x[0].length > 34 ? x[0].slice(0,34) + '…' : x[0]),
+          datasets: [{ data: DATA.top_carriers.slice(0,15).map(x=>x[1]), backgroundColor: EMERALD, borderRadius: 3 }]},
+  options: horizOpts
+});
+new Chart(document.getElementById('chart-groups'), {
+  type: 'bar',
+  data: { labels: DATA.top_groups.slice(0,15).map(x=>x[0]),
+          datasets: [{ data: DATA.top_groups.slice(0,15).map(x=>x[1]), backgroundColor: "#0F766E", borderRadius: 3 }]},
+  options: horizOpts
+});
+new Chart(document.getElementById('chart-appts-per'), {
+  type: 'bar',
+  data: { labels: DATA.appts_per_agent_buckets.map(x=>x[0]),
+          datasets: [{ data: DATA.appts_per_agent_buckets.map(x=>x[1]), backgroundColor: EMERALD_2, borderRadius: 4 }]},
+  options: baseOpts
+});
+new Chart(document.getElementById('chart-appts-year'), {
+  type: 'line',
+  data: { labels: DATA.appts_by_year.map(x=>x[0]),
+          datasets: [{ data: DATA.appts_by_year.map(x=>x[1]),
+                       borderColor: EMERALD, backgroundColor: EMERALD_LIGHT, fill: true, tension: 0.32, pointRadius: 4, pointBackgroundColor: EMERALD, borderWidth: 2.5 }]},
+  options: baseOpts
+});
+new Chart(document.getElementById('chart-home-cities'), {
+  type: 'bar',
+  data: { labels: DATA.top_home_cities.slice(0,15).map(x=>x[0]),
+          datasets: [{ data: DATA.top_home_cities.slice(0,15).map(x=>x[1]), backgroundColor: "#047857", borderRadius: 3 }]},
+  options: horizOpts
+});
+const otherStates = DATA.top_license_states.filter(function(s){ return s[0] !== 'FL'; }).slice(0,15);
+new Chart(document.getElementById('chart-lic-states'), {
+  type: 'bar',
+  data: { labels: otherStates.map(x=>x[0]),
+          datasets: [{ data: otherStates.map(x=>x[1]), backgroundColor: "#10B981", borderRadius: 3 }]},
+  options: horizOpts
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,843 @@
+{
+  "total_agents": 250707,
+  "age_buckets": [
+    [
+      "Under 25",
+      15584
+    ],
+    [
+      "25\u201329",
+      23245
+    ],
+    [
+      "30\u201334",
+      25928
+    ],
+    [
+      "35\u201344",
+      57398
+    ],
+    [
+      "45\u201354",
+      53038
+    ],
+    [
+      "55\u201364",
+      46727
+    ],
+    [
+      "65\u201374",
+      21946
+    ],
+    [
+      "75+",
+      6835
+    ]
+  ],
+  "age_median": 45,
+  "age_mean": 45.9,
+  "years_buckets": [
+    [
+      "< 1 yr",
+      25916
+    ],
+    [
+      "1\u20132",
+      57481
+    ],
+    [
+      "3\u20135",
+      45473
+    ],
+    [
+      "6\u201310",
+      42845
+    ],
+    [
+      "11\u201320",
+      42846
+    ],
+    [
+      "21\u201330",
+      22049
+    ],
+    [
+      "31+",
+      14097
+    ]
+  ],
+  "years_median": 5,
+  "years_mean": 9.2,
+  "states_buckets": [
+    [
+      "1 (FL only)",
+      128754
+    ],
+    [
+      "2",
+      19705
+    ],
+    [
+      "3\u20135",
+      27852
+    ],
+    [
+      "6\u201310",
+      20258
+    ],
+    [
+      "11\u201325",
+      33207
+    ],
+    [
+      "26+",
+      20931
+    ]
+  ],
+  "states_median": 1,
+  "states_mean": 7.1,
+  "gender": {
+    "F": 110348,
+    "M": 109718
+  },
+  "producer": {
+    "Producer": 207449,
+    "Non-Producer": 53537
+  },
+  "contact": {
+    "phone_any": {
+      "n": 249994,
+      "pct": 99.7
+    },
+    "phone_primary": {
+      "n": 249992,
+      "pct": 99.7
+    },
+    "phone_secondary": {
+      "n": 41003,
+      "pct": 16.4
+    },
+    "phone_home_bus": {
+      "n": 28465,
+      "pct": 11.4
+    },
+    "phone_wireless": {
+      "n": 115989,
+      "pct": 46.3
+    },
+    "email_any": {
+      "n": 244506,
+      "pct": 97.5
+    },
+    "email_firm": {
+      "n": 413,
+      "pct": 0.2
+    },
+    "email_primary": {
+      "n": 244437,
+      "pct": 97.5
+    },
+    "email_personal": {
+      "n": 188193,
+      "pct": 75.1
+    },
+    "linkedin": {
+      "n": 0,
+      "pct": 0.0
+    },
+    "has_firm": {
+      "n": 25526,
+      "pct": 10.2
+    },
+    "crd": {
+      "n": 25601,
+      "pct": 10.2
+    },
+    "bd_firm": {
+      "n": 20370,
+      "pct": 8.1
+    },
+    "ria_firm": {
+      "n": 16779,
+      "pct": 6.7
+    }
+  },
+  "loas": [
+    [
+      "Life",
+      155615,
+      62.1
+    ],
+    [
+      "Variable Products",
+      145580,
+      58.1
+    ],
+    [
+      "Accident and Health",
+      129218,
+      51.5
+    ],
+    [
+      "P and C",
+      54660,
+      21.8
+    ],
+    [
+      "Adjuster",
+      38338,
+      15.3
+    ],
+    [
+      "Fixed Annuities",
+      28101,
+      11.2
+    ],
+    [
+      "Other",
+      18762,
+      7.5
+    ],
+    [
+      "Credit",
+      7553,
+      3.0
+    ],
+    [
+      "Travel",
+      6904,
+      2.8
+    ],
+    [
+      "Title Legal",
+      4303,
+      1.7
+    ],
+    [
+      "Surety Bail Bonds",
+      1862,
+      0.7
+    ],
+    [
+      "Surplus Lines",
+      1645,
+      0.7
+    ],
+    [
+      "Viatical Settlement",
+      176,
+      0.1
+    ],
+    [
+      "Reinsurance",
+      75,
+      0.0
+    ]
+  ],
+  "top_home_cities": [
+    [
+      "Miami",
+      12557
+    ],
+    [
+      "Orlando",
+      8378
+    ],
+    [
+      "Tampa",
+      7307
+    ],
+    [
+      "Jacksonville",
+      5235
+    ],
+    [
+      "Kissimmee",
+      2795
+    ],
+    [
+      "Boca Raton",
+      2767
+    ],
+    [
+      "Hialeah",
+      2586
+    ],
+    [
+      "Fort Lauderdale",
+      2032
+    ],
+    [
+      "Lakeland",
+      1903
+    ],
+    [
+      "West Palm Beach",
+      1778
+    ],
+    [
+      "Pembroke Pines",
+      1776
+    ],
+    [
+      "Coral Springs",
+      1734
+    ],
+    [
+      "Naples",
+      1563
+    ],
+    [
+      "Doral",
+      1534
+    ],
+    [
+      "Sunrise",
+      1521
+    ]
+  ],
+  "top_business_cities": [
+    [
+      "Tampa",
+      18442
+    ],
+    [
+      "Miami",
+      17791
+    ],
+    [
+      "Orlando",
+      12491
+    ],
+    [
+      "Jacksonville",
+      8972
+    ],
+    [
+      "Lakeland",
+      6137
+    ],
+    [
+      "Doral",
+      5722
+    ],
+    [
+      "Boca Raton",
+      5578
+    ],
+    [
+      "Fort Lauderdale",
+      4415
+    ],
+    [
+      "Riverview",
+      3370
+    ],
+    [
+      "West Palm Beach",
+      3163
+    ],
+    [
+      "Kissimmee",
+      3112
+    ],
+    [
+      "Fort Myers",
+      2959
+    ],
+    [
+      "Hialeah",
+      2946
+    ],
+    [
+      "Clearwater",
+      2892
+    ],
+    [
+      "Sarasota",
+      2836
+    ]
+  ],
+  "home_zip_count": 4355,
+  "license_records_total": 3136471,
+  "license_unique_agents": 250000,
+  "top_license_states": [
+    [
+      "FL",
+      581764
+    ],
+    [
+      "NC",
+      151097
+    ],
+    [
+      "SC",
+      117314
+    ],
+    [
+      "TX",
+      109162
+    ],
+    [
+      "MI",
+      90501
+    ],
+    [
+      "GA",
+      88725
+    ],
+    [
+      "VA",
+      80186
+    ],
+    [
+      "PA",
+      80094
+    ],
+    [
+      "OH",
+      72592
+    ],
+    [
+      "TN",
+      71968
+    ],
+    [
+      "OK",
+      65279
+    ],
+    [
+      "LA",
+      64970
+    ],
+    [
+      "AL",
+      63948
+    ],
+    [
+      "AZ",
+      61670
+    ],
+    [
+      "DE",
+      56768
+    ]
+  ],
+  "top_loa_categories": [
+    [
+      "Accident/Health",
+      1059730
+    ],
+    [
+      "Life",
+      819910
+    ],
+    [
+      "Property/Casualty",
+      564272
+    ],
+    [
+      "Adjuster",
+      326039
+    ],
+    [
+      "Variable Products",
+      262050
+    ],
+    [
+      "Fixed Annuities",
+      39347
+    ],
+    [
+      "Other",
+      18936
+    ],
+    [
+      "Surplus Lines",
+      11308
+    ],
+    [
+      "Travel",
+      10549
+    ],
+    [
+      "Credit",
+      7780
+    ]
+  ],
+  "top_loa_names": [
+    [
+      "Life",
+      571430
+    ],
+    [
+      "Accident, Health or Sickness",
+      503475
+    ],
+    [
+      "Life, Health, Variable Annuities",
+      275361
+    ],
+    [
+      "Personal Lines",
+      236115
+    ],
+    [
+      "Casualty",
+      202226
+    ],
+    [
+      "Property",
+      200098
+    ],
+    [
+      "Accident, Health",
+      199741
+    ],
+    [
+      "Health",
+      160616
+    ],
+    [
+      "Property, Casualty",
+      121590
+    ],
+    [
+      "Life, Variable Annuities",
+      119976
+    ],
+    [
+      "Variable Life, Variable Annuities",
+      80870
+    ],
+    [
+      "Life, Accident, Health & HMO",
+      77368
+    ],
+    [
+      "All Lines",
+      48100
+    ],
+    [
+      "Life, Annuity",
+      41422
+    ],
+    [
+      "Life, Fixed Annuities",
+      37272
+    ]
+  ],
+  "top_license_types": [
+    [
+      "Producer",
+      2654129
+    ],
+    [
+      "Adjuster",
+      283722
+    ],
+    [
+      "Agent",
+      74611
+    ],
+    [
+      "Independent Adjuster",
+      43514
+    ],
+    [
+      "Customer Service Representative",
+      15475
+    ],
+    [
+      "Personal Lines Broker-Agent",
+      9955
+    ],
+    [
+      "Broker",
+      8963
+    ],
+    [
+      "Life Agent Individual",
+      7690
+    ],
+    [
+      "Limited Lines Producer",
+      6035
+    ],
+    [
+      "Public Adjuster",
+      5320
+    ]
+  ],
+  "appt_records_total": 4962015,
+  "appt_unique_agents": 218814,
+  "active_appointments": 2486629,
+  "cancelled_appointments": 2475386,
+  "top_carriers": [
+    [
+      "AMERICAN GENERAL LIFE INSURANCE COMPANY",
+      44930
+    ],
+    [
+      "CIGNA HEALTH AND LIFE INSURANCE COMPANY",
+      43224
+    ],
+    [
+      "UNITEDHEALTHCARE INSURANCE COMPANY",
+      42201
+    ],
+    [
+      "UNITED HEALTHCARE OF FLORIDA, INC.",
+      38921
+    ],
+    [
+      "SUNSHINE STATE HEALTH PLAN INC",
+      38181
+    ],
+    [
+      "HUMANA INSURANCE COMPANY",
+      37958
+    ],
+    [
+      "CELTIC INSURANCE COMPANY",
+      36668
+    ],
+    [
+      "AETNA LIFE INSURANCE COMPANY",
+      36397
+    ],
+    [
+      "AETNA HEALTH INC. (A FLORIDA CORPORATION)",
+      34671
+    ],
+    [
+      "TRANSAMERICA LIFE INSURANCE COMPANY",
+      34387
+    ],
+    [
+      "CARE IMPROVEMENT PLUS SOUTH CENTRAL INSURANCE COMPANY",
+      33259
+    ],
+    [
+      "HUMANA MEDICAL PLAN, INC.",
+      32165
+    ],
+    [
+      "SIMPLY HEALTHCARE PLANS INC",
+      29006
+    ],
+    [
+      "CENTENE VENTURE COMPANY FLORIDA",
+      28342
+    ],
+    [
+      "PRIMERICA LIFE INSURANCE COMPANY",
+      27797
+    ],
+    [
+      "GOLDEN RULE INSURANCE COMPANY",
+      27411
+    ],
+    [
+      "FIDELITY & GUARANTY LIFE INSURANCE COMPANY",
+      26998
+    ],
+    [
+      "SECURITY NATIONAL INSURANCE COMPANY",
+      26866
+    ],
+    [
+      "LIFE INSURANCE COMPANY OF THE SOUTHWEST",
+      26756
+    ],
+    [
+      "PREFERRED CARE PARTNERS, INC.",
+      26434
+    ]
+  ],
+  "top_groups": [
+    [
+      "UNITEDHEALTH GRP",
+      511014
+    ],
+    [
+      "CENTENE CORP GRP",
+      476225
+    ],
+    [
+      "CVS GRP",
+      371027
+    ],
+    [
+      "HUMANA GRP",
+      324032
+    ],
+    [
+      "ELEVANCE HLTH INC GRP",
+      279902
+    ],
+    [
+      "TRAVELERS GRP",
+      128559
+    ],
+    [
+      "PROGRESSIVE GRP",
+      125878
+    ],
+    [
+      "ALLSTATE INS GRP",
+      112709
+    ],
+    [
+      "HCSC GRP",
+      98829
+    ],
+    [
+      "NATIONWIDE CORP GRP",
+      93497
+    ],
+    [
+      "LIBERTY MUT GRP",
+      87893
+    ],
+    [
+      "CIGNA HLTH GRP",
+      87810
+    ],
+    [
+      "MOLINA HEALTHCARE INC GRP",
+      83321
+    ],
+    [
+      "DEVOTED HLTH GRP",
+      74785
+    ],
+    [
+      "GUIDEWELL MUT HOLDING GRP",
+      71974
+    ]
+  ],
+  "appts_per_agent_buckets": [
+    [
+      "1",
+      43785
+    ],
+    [
+      "2\u20135",
+      47933
+    ],
+    [
+      "6\u201310",
+      27018
+    ],
+    [
+      "11\u201325",
+      40948
+    ],
+    [
+      "26\u201350",
+      29453
+    ],
+    [
+      "51+",
+      29677
+    ]
+  ],
+  "appts_per_agent_median": 8,
+  "appts_per_agent_mean": 22.7,
+  "appts_by_year": [
+    [
+      2010,
+      54365
+    ],
+    [
+      2011,
+      63329
+    ],
+    [
+      2012,
+      75124
+    ],
+    [
+      2013,
+      114270
+    ],
+    [
+      2014,
+      137313
+    ],
+    [
+      2015,
+      91251
+    ],
+    [
+      2016,
+      111551
+    ],
+    [
+      2017,
+      139983
+    ],
+    [
+      2018,
+      195899
+    ],
+    [
+      2019,
+      260413
+    ],
+    [
+      2020,
+      348235
+    ],
+    [
+      2021,
+      450502
+    ],
+    [
+      2022,
+      491391
+    ],
+    [
+      2023,
+      544511
+    ],
+    [
+      2024,
+      514938
+    ],
+    [
+      2025,
+      115994
+    ]
+  ],
+  "licenses_per_agent_buckets": [
+    [
+      "1",
+      54708
+    ],
+    [
+      "2\u20135",
+      92599
+    ],
+    [
+      "6\u201310",
+      26973
+    ],
+    [
+      "11\u201325",
+      38502
+    ],
+    [
+      "26+",
+      37218
+    ]
+  ],
+  "coverage_summary": {
+    "agents_with_license_detail": 250000,
+    "agents_with_carrier_appts": 218814,
+    "agents_with_both": 218814,
+    "agents_license_only": 31186,
+    "agents_neither": 707
+  }
+}
