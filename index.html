@@ -440,15 +440,65 @@ DATA.loas.slice(0, 12).forEach(function(loa){
   loaList.appendChild(row);
 });
 
+const CARRIER_OVERRIDES = {
+  'AMERICAN GENERAL LIFE INSURANCE COMPANY': 'American General Life',
+  'CIGNA HEALTH AND LIFE INSURANCE COMPANY': 'Cigna Health & Life',
+  'UNITEDHEALTHCARE INSURANCE COMPANY': 'UnitedHealthcare',
+  'UNITED HEALTHCARE OF FLORIDA, INC.': 'UnitedHealthcare of FL',
+  'SUNSHINE STATE HEALTH PLAN INC': 'Sunshine State Health Plan',
+  'HUMANA INSURANCE COMPANY': 'Humana',
+  'CELTIC INSURANCE COMPANY': 'Celtic',
+  'AETNA LIFE INSURANCE COMPANY': 'Aetna Life',
+  'AETNA HEALTH INC. (A FLORIDA CORPORATION)': 'Aetna Health (FL)',
+  'TRANSAMERICA LIFE INSURANCE COMPANY': 'Transamerica Life',
+  'CARE IMPROVEMENT PLUS SOUTH CENTRAL INSURANCE COMPANY': 'Care Improvement+ S. Central',
+  'HUMANA MEDICAL PLAN, INC.': 'Humana Medical Plan',
+  'SIMPLY HEALTHCARE PLANS INC': 'Simply Healthcare',
+  'CENTENE VENTURE COMPANY FLORIDA': 'Centene Venture (FL)',
+  'PRIMERICA LIFE INSURANCE COMPANY': 'Primerica Life',
+  'GOLDEN RULE INSURANCE COMPANY': 'Golden Rule',
+  'FIDELITY & GUARANTY LIFE INSURANCE COMPANY': 'Fidelity & Guaranty Life',
+  'SECURITY NATIONAL INSURANCE COMPANY': 'Security National',
+  'LIFE INSURANCE COMPANY OF THE SOUTHWEST': 'LICO of the Southwest',
+  'PREFERRED CARE PARTNERS, INC.': 'Preferred Care Partners',
+};
+const GROUP_OVERRIDES = {
+  'UNITEDHEALTH GRP': 'UnitedHealth',
+  'CENTENE CORP GRP': 'Centene Corp',
+  'CVS GRP': 'CVS',
+  'HUMANA GRP': 'Humana',
+  'ELEVANCE HLTH INC GRP': 'Elevance Health',
+  'TRAVELERS GRP': 'Travelers',
+  'PROGRESSIVE GRP': 'Progressive',
+  'ALLSTATE INS GRP': 'Allstate',
+  'HCSC GRP': 'HCSC',
+  'NATIONWIDE CORP GRP': 'Nationwide',
+  'LIBERTY MUT GRP': 'Liberty Mutual',
+  'CIGNA HLTH GRP': 'Cigna Health',
+  'MOLINA HEALTHCARE INC GRP': 'Molina Healthcare',
+  'DEVOTED HLTH GRP': 'Devoted Health',
+  'GUIDEWELL MUT HOLDING GRP': 'GuideWell Mutual',
+};
+function titleCase(s){
+  return s.toLowerCase().replace(/\b([a-z])/g, function(_,c){ return c.toUpperCase(); });
+}
+function shortenCarrier(name){
+  if (CARRIER_OVERRIDES[name]) return CARRIER_OVERRIDES[name];
+  return titleCase(name).replace(/\s+Insurance\s+Company\b.*$/i,'').replace(/,?\s*Inc\.?$/i,'').trim();
+}
+function shortenGroup(name){
+  if (GROUP_OVERRIDES[name]) return GROUP_OVERRIDES[name];
+  return titleCase(name).replace(/\s+Grp$/i,'').trim();
+}
 new Chart(document.getElementById('chart-carriers'), {
   type: 'bar',
-  data: { labels: DATA.top_carriers.slice(0,15).map(x => x[0].length > 34 ? x[0].slice(0,34) + '…' : x[0]),
+  data: { labels: DATA.top_carriers.slice(0,15).map(x => shortenCarrier(x[0])),
           datasets: [{ data: DATA.top_carriers.slice(0,15).map(x=>x[1]), backgroundColor: EMERALD, borderRadius: 3 }]},
-  options: horizOpts
+  options: { ...horizOpts, layout: { padding: { left: 4 } } }
 });
 new Chart(document.getElementById('chart-groups'), {
   type: 'bar',
-  data: { labels: DATA.top_groups.slice(0,15).map(x=>x[0]),
+  data: { labels: DATA.top_groups.slice(0,15).map(x => shortenGroup(x[0])),
           datasets: [{ data: DATA.top_groups.slice(0,15).map(x=>x[1]), backgroundColor: "#0F766E", borderRadius: 3 }]},
   options: horizOpts
 });
