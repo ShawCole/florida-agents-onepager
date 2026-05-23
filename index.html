@@ -77,7 +77,10 @@
   .chart-box{position:relative;height:280px}
   .chart-box.x-tall{height:520px}
 
-  table.bundle{width:100%;border-collapse:collapse;font-size:15px}
+  .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .table-scroll::-webkit-scrollbar{height:8px}
+  .table-scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
+  table.bundle{width:100%;min-width:720px;border-collapse:collapse;font-size:15px}
   table.bundle th,table.bundle td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line)}
   table.bundle thead th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);font-weight:600;border-bottom:2px solid var(--ink)}
   table.bundle tbody tr:last-child td{border-bottom:none}
@@ -159,7 +162,7 @@
     <p class="sec-desc">All three datasets are joinable on <strong>NPN</strong> (National Producer Number) — the universal identifier used by every state DOI. You get the full agent population, every license they hold in any state, and every carrier they're appointed to — bundled and ready to query.</p>
   </div>
 
-  <div class="card" style="padding:8px 0">
+  <div class="card table-scroll" style="padding:8px 0">
     <table class="bundle">
       <thead><tr><th>Dataset</th><th>Rows</th><th>Fields</th><th>Population Coverage</th><th>What it tells you</th></tr></thead>
       <tbody>
